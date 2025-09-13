@@ -2,6 +2,16 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Install next with npm
+```bash
+npm install next
+```
+
+Install groq-sdk for Groq with npm
+```bash
+npm install --save groq-sdk
+```
+
 First, run the development server:
 
 ```bash
