@@ -1,5 +1,5 @@
 "use client"
-
+import Logo from "../components/Logo"
 import { Button } from "@/components/ui/button"
 import { Sun, Moon } from "lucide-react"
 
@@ -12,11 +12,10 @@ export default function Header({ isDark, toggleTheme }: HeaderProps) {
   return (
     <header className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-          <div className="w-4 h-4 bg-white rounded-full"></div>
-        </div>
+        {/* <img src="icon.png" style={{width:"32px", height:"32px"}}></img> */}
+        <Logo></Logo>
         <span className="text-xl font-semibold text-gray-900 dark:text-white">
-          BuildFlow
+          OpsForge
         </span>
       </div>
       
