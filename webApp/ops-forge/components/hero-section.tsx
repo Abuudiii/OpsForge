@@ -10,10 +10,41 @@ import { streamGroqChat, type ChatMessage } from "@/actions/LLMS/llmActions";
 export default function HeroSection() {
   const [inputText, setInputText] = useState("");
   const [response, setResponse] = useState("");
+  const [modifying, setModifying] = useState(false);
   const [isStreaming, startTransition] = useTransition();
 
   const handleSubmit = () => {
     if (!inputText.trim()) return;
+    
+    // Adding the modify deducing part
+    const isModifiedMessages: ChatMessage[] = [
+      {
+        role: "system",
+        content: "If the user is going to modify the cloud infrastructure project and is stated as a command that changes anything then respond with only MODIFY else respond with only NOMODIFY"
+      },
+      { role: "user", content: inputText }
+    ]
+
+    startTransition(async () => {
+      try {
+        const { output } = await streamGroqChat(isModifiedMessages);
+        setModifying(false); // Clear previous response
+
+        let accumulated = "";
+        for await (const token of readStreamableValue(output)) {
+          accumulated += token ?? "";
+        }
+
+        if (accumulated == "MODIFY") {
+          setModifying(true)
+        }
+
+      } catch {
+        setResponse("Sorry, there was an error processing your request.");
+      }
+    });
+
+    console.log("is modifying", modifying);
 
     const messages: ChatMessage[] = [
       {
