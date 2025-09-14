@@ -180,17 +180,6 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* Trust Indicators */}
-      <div className="flex items-center gap-3">
-        <div className="flex -space-x-2">
-          <div className="w-8 h-8 bg-blue-500 rounded-full border-2 border-white dark:border-gray-800"></div>
-          <div className="w-8 h-8 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
-          <div className="w-8 h-8 bg-purple-500 rounded-full border-2 border-white dark:border-gray-800"></div>
-        </div>
-        <span className="text-gray-700 dark:text-gray-300 font-medium transition-colors">
-          Trusted by 400K+ users
-        </span>
-      </div>
     </main>
   );
 }
