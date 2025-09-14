@@ -70,6 +70,16 @@ export async function prepareInvokingLambda(query: string) {
 
         const { object } = await completeStructuredGroqChat<PreparationResult>(messages, schema, { temperature: 0 });
         console.log('Structured preparation result:', object);
+        const endpoint = 'https://d7g8ps61-5000.use.devtunnels.ms/htn';
+        const payload = JSON.stringify(object);
+
+        fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload
+        })
+        .then(() => console.log('Prepared object posted (fire-and-forget)'))
+        .catch(err => console.error('Error posting prepared object:', err));
         return object; // { action, modifiedInfo }
     } catch (err) {
         console.error('Error in prepareInvokingLambda:', err);
