@@ -1,0 +1,30 @@
+# Core dependencies
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Optional dependencies for enhanced functionality
+# Uncomment if needed:
+
+# For accurate token counting
+# tiktoken>=0.5.0
+
+# For async support
+# aiohttp>=3.9.0
+# asyncio>=3.4.3
+
+# For streaming responses
+# sseclient-py>=1.7.2
+
+# For data validation
+# pydantic>=2.0.0
+
+# For testing
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0
+# pytest-mock>=3.11.1
+
+# For development
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.5.0
+# isort>=5.12.0

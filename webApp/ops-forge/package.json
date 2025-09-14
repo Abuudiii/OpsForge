@@ -1,0 +1,32 @@
+{
+  "name": "ops-forge",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ai-sdk/rsc": "^1.0.44",
+    "@aws-sdk/client-lambda": "^3.888.0",
+    "ai": "^5.0.44",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "groq-sdk": "^0.32.0",
+    "lucide-react": "^0.460.0",
+    "next": "15.5.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tailwind-merge": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
