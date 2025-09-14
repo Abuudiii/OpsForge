@@ -40,13 +40,13 @@ export default function Header({ isDark, toggleTheme }: HeaderProps) {
         </a>
         <a
           href="#"
-          className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white font-medium transition-colors"
+          className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white font-medium transition-colors mr-10"
         >
           Enterprise
         </a>
       </nav>
       
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 ml-10">
         <Button
           variant="ghost"
           size="icon"
@@ -54,9 +54,6 @@ export default function Header({ isDark, toggleTheme }: HeaderProps) {
           className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
           {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-        </Button>
-        <Button className="bg-lime-400 hover:bg-lime-500 text-gray-900 font-medium px-6">
-          Start Building
         </Button>
       </div>
     </header>
