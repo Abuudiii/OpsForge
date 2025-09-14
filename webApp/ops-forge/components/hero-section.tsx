@@ -5,7 +5,8 @@ import { readStreamableValue } from "@ai-sdk/rsc"; // ⬅️ v5 import
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowUp } from "lucide-react";
-import { streamGroqChat, type ChatMessage } from "@/actions/LLMS/llmActions";
+import { streamGroqChat, completeGroqChat, type ChatMessage } from "@/actions/LLMS/llmActions";
+import { prepareInvokingLambda } from "@/actions/LLMS/pipeline"; // server action for background prep
 
 export default function HeroSection() {
   const [inputText, setInputText] = useState("");
@@ -13,8 +14,41 @@ export default function HeroSection() {
   const [modifying, setModifying] = useState(false);
   const [isStreaming, startTransition] = useTransition();
 
+  // Toggle between streaming and non-streaming easily by swapping this reference:
+  //const chatFn = completeGroqChat; // <- Non-streaming (bulk) mode
+  const chatFn = streamGroqChat; // <- Streaming mode (default)
+
+  type StreamingResult = { output: any };
+  type NonStreamingResult = { content: string };
+  type ChatFn = (messages: ChatMessage[]) => Promise<StreamingResult | NonStreamingResult>;
+
+  const isStreamingResult = (res: any): res is StreamingResult => res && "output" in res;
+
+  const runChat = async (
+    fn: ChatFn,
+    messages: ChatMessage[],
+    onToken: (partial: string) => void,
+    onDone?: () => void
+  ) => {
+    const result = await fn(messages);
+    if (isStreamingResult(result)) {
+      let acc = "";
+      for await (const token of readStreamableValue(result.output)) {
+        acc += token ?? "";
+        onToken(acc);
+      }
+      onDone?.();
+    } else {
+      onToken(result.content);
+      onDone?.();
+    }
+  };
+
   const handleSubmit = () => {
     if (!inputText.trim()) return;
+
+  // Fire-and-forget server action to prepare invocation (no UI response handling needed)
+  prepareInvokingLambda(inputText).catch(() => { /* intentionally ignore errors for UI */ });
     
     // Adding the modify deducing part
     const isModifiedMessages: ChatMessage[] = [
@@ -27,20 +61,19 @@ export default function HeroSection() {
 
     startTransition(async () => {
       try {
-        const { output } = await streamGroqChat(isModifiedMessages);
-        setModifying(false); // Clear previous response
-
-        let accumulated = "";
-        for await (const token of readStreamableValue(output)) {
-          accumulated += token ?? "";
-        }
-
-        if (accumulated == "MODIFY") {
-          setModifying(true)
-        }
-
+        // For lightweight classification a single full response is fine; reuse chatFn abstraction
+        let classification = "";
+        await runChat(
+          chatFn as ChatFn,
+          isModifiedMessages,
+          (partial) => {
+            classification = partial; // we only care about final token set
+          }
+        );
+        setModifying(classification.trim() === "MODIFY");
       } catch {
-        setResponse("Sorry, there was an error processing your request.");
+        // Non-fatal for main response; just ignore classification errors
+        setModifying(false);
       }
     });
 
@@ -57,14 +90,8 @@ export default function HeroSection() {
 
     startTransition(async () => {
       try {
-        const { output } = await streamGroqChat(messages);
-        setResponse(""); // Clear previous response
-
-        let accumulated = "";
-        for await (const token of readStreamableValue(output)) {
-          accumulated += token ?? "";
-          setResponse(accumulated);
-        }
+        setResponse("");
+        await runChat(chatFn as ChatFn, messages, (partial) => setResponse(partial));
       } catch {
         setResponse("Sorry, there was an error processing your request.");
       }

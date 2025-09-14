@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ai-sdk/rsc": "^1.0.44",
+    "@aws-sdk/client-lambda": "^3.888.0",
     "ai": "^5.0.44",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
