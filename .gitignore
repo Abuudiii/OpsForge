@@ -1,0 +1,12 @@
+# Ignore everything by default
+*
+
+# But allow deployment folder and its contents
+!deployment/
+!deployment/**
+
+# Allow root README
+!README.md
+
+# Allow git files
+!.gitignore
