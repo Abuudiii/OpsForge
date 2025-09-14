@@ -103,15 +103,16 @@ export default function HeroSection() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center px-6 py-20 max-w-4xl mx-auto text-center">
+    <main className="flex flex-col items-center justify-center px-1 py-20 max-w-4xl mx-auto text-center">
       <h1 className="text-5xl md:text-6xl font-light text-gray-900 dark:text-white mb-8 leading-tight transition-colors">
-        Let&apos;s make your dream a <span className="text-lime-400 font-normal">reality.</span>
+
+        Your go to solution to <span className="text-orange-400 font-normal">conquering</span>
         <br />
-        Right now.
+        cloud infrastructure
       </h1>
 
       <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 max-w-2xl transition-colors">
-        BuildFlow lets you build fully-functional apps in minutes with just your words.
+        OpsForge lets you build fully-functional projects in minutes with just your words.
       </p>
       <p className="text-lg text-gray-700 dark:text-gray-300 mb-12 transition-colors">
         No coding necessary.
@@ -146,46 +147,30 @@ export default function HeroSection() {
               variant="outline"
               size="sm"
               onClick={() =>
-                handleSuggestionClick("Build a reporting dashboard with charts and analytics")
+                handleSuggestionClick("Create a VPC in the Virgina region")
               }
               className="rounded-full text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-              Reporting Dashboard
+              Create a VPC 
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={() =>
-                handleSuggestionClick("Create a gaming platform with user profiles and leaderboards")
+                handleSuggestionClick("Read S3 contents in us-east-1")
               }
               className="rounded-full text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-              Gaming Platform
+              Read S3 Contents 
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handleSuggestionClick("Design an onboarding portal for new employees")}
+              onClick={() => handleSuggestionClick("Configure Route 53 records without interupting endpoints")}
               className="rounded-full text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-              Onboarding Portal
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleSuggestionClick("Build a networking app for professionals")}
-              className="rounded-full text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              Networking App
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleSuggestionClick("Create a room visualizer for interior design")}
-              className="rounded-full text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              Room Visualizer
-            </Button>
+              Configure Route 53 Records
+            </Button>             
           </div>
         </div>
       </div>
