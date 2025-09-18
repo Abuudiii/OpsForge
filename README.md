@@ -1,4 +1,4 @@
-# OpsForge
+# OpsForge (Hack the North)
 
 ## Inspiration
 Cloud infrastructure can be hard to deploy and set up, especially for those with limited exposure. Even experienced cloud developers often spend a significant amount of time configuring infrastructure through Infrastructure-as-Code (IaC) tools like **Terraform** or **AWS CloudFormation**.
